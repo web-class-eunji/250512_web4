@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>탭메뉴</title>
+    <style>
+        .tab_section {
+            margin: 50px;
+            position: relative;
+        }
+
+        ul {
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .tab {
+            width: 80px;
+            list-style: none;
+            height: 35px;
+            padding: 10px 20px;
+            background-color: rgb(255, 250, 159);
+            font-size: 20px;
+            text-align: center;
+            line-height: 35px;
+            border-radius: 20px 20px 0 0;
+            color: rgb(255, 162, 0);
+            cursor: pointer;
+        }
+
+        .tab.active {
+            background-color: rgb(255, 246, 75);
+            color: rgb(255, 94, 0);
+        }
+
+        .tab_content {
+            position: absolute;
+            top: 55px;
+            left: 0;
+            padding: 16px;
+            background-color: rgb(255, 246, 75);
+            border-radius: 0 20px 20px 20px;
+            display: none;
+        }
+
+        .tab_content.active {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <section class="tab_section">
+        <ul>
+            <li class="tab active" data-tab="1">tab1</li>
+            <li class="tab" data-tab="2">tab2</li>
+            <li class="tab" data-tab="3">tab3</li>
+            <!-- data- : 데이터 속성(data Attribute) : data-** 형식으로 작성한다. (*부분에는 사용자가 원하는 이름을 자유롭게 지정한다.) data- 속성은 보통 자바스크립트에서 다루기 위해 사용됨 -->
+        </ul>
+
+        <div id="tab_1" class="tab_content active">
+            <p>
+                첫번째 탭입니다.
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati vitae vero vel reprehenderit neque, doloremque aliquam consequatur ea praesentium sunt quod dicta molestias necessitatibus perspiciatis illo mollitia eaque ipsam provident?
+            </p>
+        </div>
+        <div id="tab_2" class="tab_content">
+            <p>
+                두번째 탭입니다.
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati vitae vero vel reprehenderit neque, doloremque aliquam consequatur ea praesentium sunt quod dicta molestias necessitatibus perspiciatis illo mollitia eaque ipsam provident?
+            </p>
+        </div>
+        <div id="tab_3" class="tab_content">
+            <p>
+                세번째 탭입니다.
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati vitae vero vel reprehenderit neque, doloremque aliquam consequatur ea praesentium sunt quod dicta molestias necessitatibus perspiciatis illo mollitia eaque ipsam provident?
+            </p>
+        </div>
+
+    </section>
+    <script>
+        const tabs = document.querySelectorAll(".tab"); // 탭버튼
+        const tabContent = document.querySelectorAll(".tab_content");
+        console.log(tabs);
+        console.log(tabContent);
+
+        tabs.forEach(tab =>{
+            // forEach(item,index,array => {
+            //      item : 현재 순회중인 배열의 요소(필수! 작명은 자유)
+            //              for문의 let i 같은 역할
+            //      index : 현재 요소의 인덱스(선택)
+            //      array : 현재 순회중인 배열 자체(선택)
+            // });
+            tab.addEventListener('click',()=>{
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
