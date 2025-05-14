@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타이핑인터랙션</title>
+    <style>
+        body {
+            background: rgb(138, 221, 247);
+        }
+
+        #typing {
+            font-size: 72px;
+            font-weight: 900;
+            color: #fff;
+            margin: 0 300px;
+            width: fit-content;
+            transform: translateY(350px);
+            border-right: 2px solid #fff;
+            animation: borderAnimation 1s step-end infinite;
+        }
+        /* border-color : transparent */
+        @keyframes borderAnimation {
+            50% {
+                border-color: transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="typing">
+        <!-- "WELCOME TO MY PORTFOLIO" -->
+    </div>
+
+    <script>
+        // "WELCOME TO MY PORTFOLIO"
+        const texts = [
+            "WELCOME TO MY PORTFOLIO",
+            "저의 포트폴리오에 오신것을 환영합니다.",
+            "저는 강아지를 좋아합니다.",
+            "ENJOY MY PORTFOLIO"
+        ] 
+
+        let textIndex = 0; //현재 타이핑중인 문장의 순서를 저장
+        let charIndex = 0; // 문장 내에서 현재 타이핑중인 글자의 순서를 저장
+
+        const typingElement = document.getElementById("typing");
+        const typing = ()=>{
+            if(charIndex < texts[textIndex].length){
+                console.log(texts[textIndex].length);
+                typingElement.textContent += texts[textIndex][charIndex];
+                charIndex++;
+
+                setTimeout(typing,150);
+            }else {
+                setTimeout(()=>{
+                    typingElement.textContent = "";
+                    charIndex = 0;
+                    textIndex = (textIndex + 1) % texts.length;
+                    //texts.length : 4
+                    //textIndex +1 : 현재 인덱스를 1 증가시킴
+                    typing();
+                }, 1000);
+            }
+        };
+        typing();
+ 
+
+    </script>
+</body>
+</html>
