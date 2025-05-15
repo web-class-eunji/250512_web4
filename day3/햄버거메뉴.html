@@ -4,6 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>햄버거메뉴</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .ham_container {
+            position: fixed;
+            right: 24px;
+            top: 24px;
+            cursor: pointer;
+            z-index: 999;
+            padding: 16px 0;
+        }
+
+        .hamburger {
+            width: 40px;
+            height: 3px;
+            background-color: #000;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .hamburger::before,
+        .hamburger::after {
+            content: '';
+            width: 40px;
+            height: 3px;
+            background-color: #000;
+            display: block;
+            position: absolute;
+            left: 0;
+            transition: 0.3s;
+        }
+
+        .hamburger::before {
+            top: -10px;
+        }
+
+        .hamburger::after {
+            top: 10px;
+        }
+
+        .hamburger.active {
+            background-color: transparent;
+        }
+
+        .hamburger.active::before {
+            transform: rotate(-45deg);
+            top: 0;
+            background-color: #ffc400;
+        }
+
+        .hamburger.active::after {
+            transform: rotate(45deg);
+            top: 0;
+            background-color: #ffc400;
+        }
+
+        .menu {
+            position: fixed;
+            top: 0;
+            width: 300px;
+            height: 100%;
+            background-color: rgb(249, 255, 182);
+            padding: 0;         
+            margin: 0;
+            right: -300px;
+            transition: 0.3s;
+        }
+
+        .menu.active {
+            right: 0;
+        }
+
+        .menu > li {
+            list-style: none;
+            padding: 16px;
+        }
+
+        .menu > li > a {
+            color: #ffc400;
+            font-size: 20px;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
     <div class="ham_container">
@@ -23,7 +109,32 @@
     </ul>
 
     <script>
+        //햄버거, 햄컨테이너, 메뉴 가져오기
+        const hamburger = document.querySelector(".hamburger");
+        const hamContainer = document.querySelector(".ham_container");
+        const menu = document.querySelector(".menu");
 
+        // hamContainer.addEventListener("click",()=>{
+        //     hamburger.classList.toggle('active');
+        //     menu.classList.toggle("active");
+        //     // toggle : 해당 클래스가 이미 active라는 것을 가지고 있다고 인식이 되면 제거하고, active가 안 붙어있으면 붙인다. 
+        //     //토글은 두가지 상태만을 가지고 제어한다.
+        // });
+
+        let isMenuOpen = true;
+        hamContainer.addEventListener("click", ()=>{
+            //만약 isMenuOpen가 true라면 햄버거,메뉴한데 active를 붙인다.
+            // 만약 false라면 remove로 active를 떼어준다.
+            // isMenuOpen이 true 라서 클릭했을 때 active를 붙여주었다면 다음 클릭에는 active가 떨어져야 하므로 isMenuOpen를 false로 변경해줄것
+            if(isMenuOpen){
+                hamburger.classList.add('active');
+                menu.classList.add('active');
+            }else {
+                hamburger.classList.remove('active');
+                menu.classList.remove('active');
+            }
+            isMenuOpen = !isMenuOpen;
+        });
     </script>
 </body>
 </html>

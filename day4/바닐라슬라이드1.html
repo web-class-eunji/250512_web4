@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>바닐라슬라이드</title>
+    <style>
+        .slide_container {
+            width: 1000px;
+            height: 500px;
+            border: 3px solid darkcyan;
+            text-align: center;
+            font-size: 100px;
+            line-height: 500px;
+            color: darkcyan;
+            box-sizing: border-box;
+            margin: 0 auto;
+        }
+
+        .btn_box {
+            width: 1000px;
+            margin: 50px auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn_box > button {
+            width: 100px;
+            height: 50px;
+            background-color: darkcyan;
+            color: #fff;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide_container">
+    </div>
+
+    <div class="btn_box">
+        <button>prev</button>
+        <button>next</button>
+    </div>
+    <script>
+        const viewBox = document.querySelector('.slide_container');
+        const btns = document.querySelector('.btn_box');
+        let index = 1; //초기값
+
+        viewBox.innerHTML = index;
+        // innerHTML : 보여지는것만 가져옴
+        // textContent : 숨겨진 display:none 된 것들도 다 가져옴
+
+        console.log(btns.children[0]);
+        btns.children[0].addEventListener('click',prev);
+        btns.children[1].addEventListener('click',next);
+
+        function prev(){
+            //index가 1과 같다면 인덱스에 4를 대입할것이고
+            // index가 1이 아니라면 --감소할것
+            // 4를 대입하거나 감소가 끝나면 감소하거나 4라는 값을 viewBox에 다시 넣어줌
+
+            if(index === 1){
+                index = 4;
+            }else{
+                index--;
+            }
+            viewBox.innerHTML = index;
+        }
+
+        function next(){
+            if(index === 4){
+                index = 1;
+            }else {
+                index++;
+            }
+            viewBox.innerHTML = index;
+        }
+    </script>
+</body>
+</html>
