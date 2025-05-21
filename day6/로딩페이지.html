@@ -18,18 +18,62 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(135deg,pink,rgb(255, 127, 148),rgb(255, 66, 98));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .dots {
             display: flex;
+            gap: 16px;
+            padding: 24px;
         }
-
+        
         .dot {
             width: 16px;
             height: 16px;
             background-color: #fff;
             border-radius: 50%;
-            /* 서현님녹화 */
+            animation: bolls 1.5s infinite linear;
+        }
+
+        .dot:nth-child(2){
+            animation-delay: 0.3s;
+        }
+
+        .dot:nth-child(3){
+            animation-delay: 0.6s;
+        }
+
+        .loding_text {
+            font-size: 20px;
+            color: #fff;
+            font-weight: 900;
+            animation: text_fade 1.5s infinite;
+        }
+
+        @keyframes bolls {
+            0% {
+                transform: translateY(1);
+            }
+            50% {
+                transform: translateY(20px);
+            }
+        }
+
+        @keyframes text_fade {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -47,5 +91,22 @@
         <h1>로딩완료</h1>
         <p>웹페이지 확인 가능</p>
     </section>
+
+    <script>
+        function hideLoading(){
+            //loding_contianer랑 main_container 가져오기
+            // 로딩컨테이너에 히든 클래스 붙이기
+            //메인컨테이너의 스타일을 display block 으로 변경하기
+            const lodingContainer = document.querySelector('.loding_contianer');
+            const mainContainer = document.querySelector('.main_contianer');
+            lodingContainer.classList.add("hidden");
+            mainContainer.style.display = 'block';
+        }
+
+        // 브라우저를 로드했을 때 ( DOMContentLoaded ) hideLoading함수를 실행
+        document.addEventListener("DOMContentLoaded",function(){
+            setTimeout(hideLoading,3000);
+        })
+    </script>
 </body>
 </html>
