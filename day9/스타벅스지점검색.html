@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스타벅스 지점검색</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .map_section {
+            display: flex;
+            background: rgb(72, 160, 72);
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            color: #fff;
+        }
+
+        .left>p {
+            font-size: 24px;
+        }
+
+        .left>h1 {
+            font-size: 60px;
+            margin: 0;
+        }
+
+        .right {
+            width: 300px;
+        }
+
+        .right>h2 {
+            font-size: 32px;
+            margin: 0;
+        }
+
+        .search_icon,
+        svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .input,
+        .search_icon {
+            margin: 0;
+            padding: 0;
+            border: none;
+            background: none;
+            outline: none;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        .input_box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #fff;
+            padding: 4px 16px;
+            width: 100%;
+            margin-top: 32px;
+            border-radius: 8px;
+        }
+
+        .map {
+            border-radius: 16px;
+        }
+
+        .input::placeholder {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="map_section">
+        <div class="left">
+            <p>반짝반짝 빛나는 커피 드실텨?</p>
+            <h1>Starbucks Place</h1>
+            <iframe class="map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12660.818146060372!2d127.00652458715817!3d37.50309380000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3e275cc653d%3A0x9b3204fc4b508a!2z7Iqk7YOA67KF7IqkIOqwleuCqOuMgOuhnOygkA!5e0!3m2!1sko!2skr!4v1748225514623!5m2!1sko!2skr"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+        <div class="right">
+            <h2>지점찾기</h2>
+            <div class="input_box">
+                <input id="input_text" class="input" type="text" placeholder="지역을 입력하세요">
+                <button class="search_icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M21.0002 21L16.6572 16.657M16.6572 16.657C17.4001 15.9141 17.9894 15.0321 18.3914 14.0615C18.7935 13.0909 19.0004 12.0506 19.0004 11C19.0004 9.94936 18.7935 8.90905 18.3914 7.93842C17.9894 6.96779 17.4001 6.08585 16.6572 5.34296C15.9143 4.60007 15.0324 4.01078 14.0618 3.60874C13.0911 3.20669 12.0508 2.99976 11.0002 2.99976C9.9496 2.99976 8.90929 3.20669 7.93866 3.60874C6.96803 4.01078 6.08609 4.60007 5.34321 5.34296C3.84288 6.84329 3 8.87818 3 11C3 13.1217 3.84288 15.1566 5.34321 16.657C6.84354 18.1573 8.87842 19.0002 11.0002 19.0002C13.122 19.0002 15.1569 18.1573 16.6572 16.657Z"
+                            stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <!-- alt 쓰는 이유 ?  접근성을 높이는 방법이다.-->
+                    <!-- 접근성 : 시각장애인 또는 고령층 등 모든 사람이 웹을 사용하는데 불편함이 없도록 웹을 설계하는 것을 말한다.  -->
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // input_text 가져오기
+        // search_icon 가져오기
+        // search_icon을 비활성화 해놓기 disabled 속성을 활용
+        // 시각적으로 비활성화 된 것이 보이게 search_icon의 스타일을 opacity 0.5 로 변경해줌
+
+        const inputText = document.getElementById("input_text");
+        const btn = document.querySelector(".search_icon");
+
+        btn.disabled = true;//disabled 비활성화 속성을 true로 작동시키겠다!
+        // disabled : 따로 만든 변수X -> html요소의 속성 (button / input 등)에 기본적으롷 존재사는 속성이다.
+        btn.style.opacity = 0.3; // 시각적으로 비활성화 된 것처럼 보이게
+
+        inputText.addEventListener("input",()=>{
+            //addEventListener("input" ? 글자를 입력 / 글자를 지우거나 복사하거나 붙여넣기 하거나 자동완성하거나 등등 input에 이벤트가 감지되면 실행하겠다~
+            if(inputText.value.trim() !== ""){
+                // input에 어떤 값이 들어와야 작동함
+                // trim : " " <- 눈에 보이진 않지만 공백이 존재함 ( 값은 있다라는것) 
+                // trim : 입력한 문자의 공백을 제거 "    강남   " -> "강남" 
+                // 즉 정말 텍스트가 존재하는지 확인하는 메서드
+                // inputText.value : 사용자가 입력한 값
+                // 사용자가 입력한 값이 "" 과 달라서 비어있지 않다면! 아래 코드를 실행하겠다~!
+                btn.disabled = false; // input에 어떤 값이 들어왔다면 disabled을 끈다.
+                btn.style.opacity = 1;
+            }else {
+                // 만약 사용자가 입력한 값이 빈값이라면
+                btn.disabled = true; // 그대로 비활성화 유지
+                btn.style.opacity = 0.3; // 그대로 비활성화 유지
+            }
+        });
+
+        function input(){
+            const query = encodeURIComponent("스타벅스 " + inputText.value.trim());
+            //encodeURIComponent : 주소창에 특수문자나 한글을 그대로 입력할 수 없기 때문에 웹 주소에 맞게 인코딩 해주는 메서드
+            // 스타벅스 제주 -> %EC%8A%A4%ED%83%80%EB%B2%85%EC%8A%A4%20%EC%A0%9C%EC%A3%BC
+
+            window.open("https://www.google.com/maps/search/" + query + "/data=!3m1!4b1");
+        }
+
+
+    </script>
+</body>
+
+</html>
