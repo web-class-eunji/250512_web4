@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문의하기</title>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <!-- email.js 랑 연동이 된것! -->
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background-color: #bababa;
+        }
+
+        form {
+            width: 400px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 2px 4px 30px rgba(66, 66, 66, 0.5);
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="contact-form">
+        <h2>문의하기</h2>
+        <!-- 받는사람, 보내는사람, 메일제목, 시간, 내용, 제출버튼 -->
+        <input type="text" name="to_name" placeholder="받는사람" required>
+        <input type="text" name="from_name" placeholder="보내는사람" required>
+        <input type="text" name="title" placeholder="메일제목" required>
+        <input type="text" name="time" placeholder="현재시간입력" required>
+        <textarea name="message" placeholder="내용입력" rows="5" required></textarea>
+        <input type="submit">
+    </form>
+
+    <script>
+        emailjs.init("QJXxAJkbbzqMjJPrM");//퍼블릭키입력
+
+        document.getElementById("contact-form").addEventListener("submit",function(e){
+            e.preventDefault(); // 폼 기본 제출을 방지
+            emailjs.sendForm('service_3bgfu9m', 'template_a86zlva', this)
+            .then(function(){
+                alert("메일이 전송되었습니다!");
+                document.getElementById("contact-form").reset();
+            }, function(error){
+                alert("메일 전송 실패 : " + error.text);
+            });
+        })
+    </script>
+</body>
+
+</html>

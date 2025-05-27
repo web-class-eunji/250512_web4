@@ -136,6 +136,22 @@
             }
         });
 
+        // 언제 검색이 되어야할까?
+        // 검색버튼을 클릭했을 때 사용자가 inputText 에 입력한 value값이 비어있지 않다면 input 실행!
+        btn.addEventListener("click",()=>{
+            if(inputText.value.trim() !== "") {
+                input();
+            }
+        });
+
+        window.addEventListener("keyup",(e) => {
+            if(e.key === "Enter" && document.activeElement === inputText && inputText.value.trim() !== ""){
+                input();
+            }
+            //e.key === "Enter" : 이벤트가 발생한 키가 Enter이고,
+            // activeElement : 현재 사용자가 클릭했거나 커서가 깜빡이는 html 요소를 가리킨다.
+        });
+
         function input(){
             const query = encodeURIComponent("스타벅스 " + inputText.value.trim());
             //encodeURIComponent : 주소창에 특수문자나 한글을 그대로 입력할 수 없기 때문에 웹 주소에 맞게 인코딩 해주는 메서드
@@ -143,6 +159,8 @@
 
             window.open("https://www.google.com/maps/search/" + query + "/data=!3m1!4b1");
         }
+
+
 
 
     </script>
