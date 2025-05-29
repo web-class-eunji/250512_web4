@@ -184,6 +184,36 @@
             setTimeout(()=>(isScrolling = false),800);
         }
 
+        //------------------------------------------------------------------------
+        // 초기화함수
+
+        function initFullPageScroll(){
+            sections.forEach((section,index) =>{
+                const rect = section.getBoundingClientRect();
+                // 각 섹션의 위치정보를 가져옴
+                if(rect.top >= 0 && rect.top < window.innerHeight){
+                    // 완전히, 또는 일부라도 화면에 섹션이 들어와 있다면
+                    // 섹션의 윗부분이 화면시작부분보다 아래에 있으면서, 화면 하단보다는 위에있을 때 
+                    currentSectionIndex = index;
+                    // 현재 보여지는 인덱스에 현재 돌고있는 index를 넣어준다. 
+                }
+            });
+            isScrolling = false;
+            // 브라우저의 너비가 1024보다 크고, 풀페이지 상태가 아니라면
+            // 풀페이지를 활성화해준 후 body에 scrollBar를 없애준다.
+            if(window.innerWidth > breakPoint && !isFullPageScrollActive){
+                isFullPageScrollActive = true;
+                document.body.style.overflow ="hidden";
+                window.addEventListener("wheel",handleScroll);
+            }else if(window.innerWidth <= breakPoint && isFullPageScrollActive){
+                isFullPageScrollActive = false;
+                document.body.style.overflow = "auto";
+                window.removeEventListener("wheel",handleScroll);
+            }
+        }
+
+        window.addEventListener("resize",initFullPageScroll);
+
         
         
     </script>
