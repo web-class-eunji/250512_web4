@@ -190,26 +190,26 @@
                 moveSlide(1000);
             });
         }
-        // // 브라우저를 켰을 때 1번 li가 먼저 보이니까 제일 처음 dot 에 active가 붙어있어야함 
-        // dotBox.children[0].classList.add('active');
+        // 브라우저를 켰을 때 1번 li가 먼저 보이니까 제일 처음 dot 에 active가 붙어있어야함 
+        dotBox.children[0].classList.add('active');
 
-        // function updateDot(){
-        //     for(let i = 0; i < sliderLength -2 ;i++){
-        //         dotBox.children[i].classList.remove('active');
-        //         if(index === 0){
-        //             dotBox.children[sliderLength-3].classList.add('active');
-        //             // sliderLength -3  : 4
-        //             // dotBox : 5의 닷이 존재함 각각 0,1,2,3,4,5 라는 index를 가지고 있음
-        //             // 마지막 5번째의 index 번호는 4이기 때문에 4번에 active를 붙이는 것 
-        //         }else if(index === sliderLength -1){
-        //             dotBox.children[0].classList.add("active");
-        //             // 마지막 복제한 슬라이드인 1번이 보이고 있다면
-        //             // dot은 제일 처음에 붙어야 하므로 0에 active붙여줌
-        //         }else{
-        //             dotBox.children[index-1].classList.add('active');
-        //         }
-        //     }
-        // }
+        function updateDot(){
+            for(let i = 0; i < sliderLength -2 ;i++){
+                dotBox.children[i].classList.remove('active');
+                if(index === 0){
+                    dotBox.children[sliderLength-3].classList.add('active');
+                    // sliderLength -3  : 4
+                    // dotBox : 5의 닷이 존재함 각각 0,1,2,3,4,5 라는 index를 가지고 있음
+                    // 마지막 5번째의 index 번호는 4이기 때문에 4번에 active를 붙이는 것 
+                }else if(index === sliderLength -1){
+                    dotBox.children[0].classList.add("active");
+                    // 마지막 복제한 슬라이드인 1번이 보이고 있다면
+                    // dot은 제일 처음에 붙어야 하므로 0에 active붙여줌
+                }else{
+                    dotBox.children[index-1].classList.add('active');
+                }
+            }
+        }
 
         setInterval(()=>{
             next();
