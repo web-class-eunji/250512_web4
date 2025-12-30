@@ -84,12 +84,12 @@
                     // 1초에 60번 필름이 한장씩 바뀐다!
                     //update() 0 -> 15
                     //requestAnimationFrame(update) 실행됨 -> 다음 프레임에 또 update()실행할게!
-                    // update() 15 -> 30
+                    // update() 15 a-> 30
                     //requestAnimationFrame(update) 실행됨 -> 다음 프레임에 또 update()실행할게!
                 }else {
                     counter.innerText = target.toLocaleString();
                     // current가 목표에 도달했거나 넘어간다면 최종 숫자를 표시해줌
-                    //toLocaleString : 1000 단위가넘어갈 때 , 붙여주는 기능
+                    // toLocaleString : 1000 단위가넘어갈 때 , 붙여주는 기능
                     // 변수가 Number 타입일때만 가능
                 }
             };
