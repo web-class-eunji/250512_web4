@@ -38,6 +38,10 @@
             color: #000;
         }
 
+        .menu.hidden {
+            display: none;
+        }
+
         @media(max-width:1024px) {
             body {
                 overflow: auto;
@@ -216,48 +220,17 @@
 
         //------------------------------------------------------------------------
         // 초기화함수
-
+        const menu = document.getElementById("menu");
         function initFullPageScroll() {
-            sections.forEach((section, index) => {
-                // section : 여러개 섹션들 중 현재접근한섹션
-                // 섹션번호 가져옴(0123...)
-                const rect = section.getBoundingClientRect();
-                // 각 섹션의 위치정보를 가져옴
-                if (rect.top >= 0 && rect.top < window.innerHeight) {
-                    // 0보다 rect.top이 크다는 건 top위로 올라가지 않았다는 것이다.(즉 보이는 상태)
-                    // rect.top이 window.innerHeight보다 작다는 건 화면의 전체 높이보다 위에 있다는 뜻이다.
-                    // 완전히, 또는 일부라도 화면에 섹션이 들어와 있다면
-                    // 섹션의 윗부분이 화면시작부분보다 아래에 있으면서, 화면 하단보다는 위에있을 때 
-                    //“섹션의 윗부분(top)이 화면의 맨 위(0)보다 아래에 있고
-                    // 화면의 맨 아래(window.innerHeight)보다 위에 있을 때”
-                    // 섹션의 상단이 화면 안에 걸쳐있을 경우 즉 완전히 보이거나 위 / 아래 일부 잘려있어도 상단 기준으로
-                    // 화면 영역 안에 있다면
-                    currentSectionIndex = index;
-                    // 현재 보여지는 인덱스에 현재 돌고있는 index를 넣어준다. 
-                }
-            });
-            isScrolling = false;
-            // 브라우저의 너비가 1024보다 크고, 풀페이지 상태가 아니라면
-            // 풀페이지를 활성화해준 후 body에 scrollBar를 없애준다.
-            if (window.innerWidth > breakPoint && !isFullPageScrollActive) {
-                isFullPageScrollActive = true;
-                document.body.style.overflow = "hidden";
+            if (window.innerWidth > breakPoint) {
                 window.addEventListener("wheel", handleScroll);
-                //handleScroll 함수를 호출할 때 매개변수에 넣어주는 값이 없는데
-                // 왜 handleScroll 함수는 event라는 매개변수를 받을까?
-                //우리가 handleScroll()을 직접 호출하는 게 아니라
-                // 브라우저가 호출하면서 event 객체를 자동으로 넣어주기 때문이다.
-                // handleScroll(eventObject);
-                //이 eventObject가 바로 우리가 받는 event
-
-                // window.addEventListener("wheel", (event) => {
-                //      handleScroll(event);
-                // });
-                // 이렇게 쓰는 것과 똑같다!
-            } else if (window.innerWidth <= breakPoint && isFullPageScrollActive) {
-                isFullPageScrollActive = false;
-                document.body.style.overflow = "auto";
+                // menuItems.forEach((item)=>{
+                // menuItems[item].classList.add("remove");
+                // })
+                menu.classList.remove("hidden");
+            } else {
                 window.removeEventListener("wheel", handleScroll);
+                menu.classList.add("hidden");
             }
         }
 
