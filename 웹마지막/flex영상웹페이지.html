@@ -302,8 +302,8 @@
     <script>
         // 모든 article(.content) 요소 선택
         const items = document.querySelectorAll(".content");
-        const aside = document.querySelector(".hidden_content");
-        const close = aside.querySelector(".close_txt");
+        const leftSlide = document.querySelector(".hidden_content");
+        const close = leftSlide.querySelector(".close_txt");
 
         // 일반 for문 사용
         for (let i = 0; i < items.length; i++) {
@@ -324,7 +324,7 @@
                 // 이벤트가 발생한 article에서 마우스가 벗어나면 vidio를 정지함
             });
 
-            // 클릭 시 aside(팝업) 활성화
+            // 클릭 시 leftSlide(팝업) 활성화
             el.addEventListener("click", function (e) {
                 // 클릭한 요소의 정보 가져오기
                 const tit = e.currentTarget.querySelector("h2").innerText;
@@ -334,22 +334,22 @@
                 const vidSrc = e.currentTarget.querySelector("video").getAttribute("src");
                 // vidio도 달라져야 하기 때문에video의 src속성값을 vidSrc에 넣어준다.
 
-                // aside에 내용 적용
-                aside.querySelector(".change_title").innerText = tit;
-                aside.querySelector(".change_text").innerText = txt;
-                aside.querySelector(".hidden_video").setAttribute("src", vidSrc);
+                // leftSlide에 내용 적용
+                leftSlide.querySelector(".change_title").innerText = tit;
+                leftSlide.querySelector(".change_text").innerText = txt;
+                leftSlide.querySelector(".hidden_video").setAttribute("src", vidSrc);
 
-                // aside 활성화 및 비디오 재생
-                aside.classList.add("on");
-                aside.querySelector(".hidden_video").play();
+                // leftSlide 활성화 및 비디오 재생
+                leftSlide.classList.add("on");
+                leftSlide.querySelector(".hidden_video").play();
+            });
+            close.addEventListener("click", function () {
+                leftSlide.classList.remove("on");
+                leftSlide.querySelector(".hidden_video").pause();
             });
         }
 
         // 닫기 버튼 클릭 (for문 밖!)
-        close.addEventListener("click", function () {
-            aside.classList.remove("on");
-            aside.querySelector(".hidden_video").pause();
-        });
     </script>
 </body>
 
